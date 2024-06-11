@@ -7,9 +7,18 @@ class Home extends React.Component{
         this.state = { posts: [] };
     }
 
+    async componentDidMount(){
+        const postsResponse = await fetch("http://localhost:8000/")
+        const postsJson = await postsResponse.json();
+        console.log(postsJson);
+        this.setState({posts: postsJson});
+    }
+
     render(){
+        const { posts } = this.state;
+
         return(
-            <h1 className='text-3xl font-bold underline'>Hello World</h1>
+            <h1 className='text-3xl font-bold underline'>{posts}</h1>
         )
     }
 }
